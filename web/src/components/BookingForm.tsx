@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabaseClient';
 
 // Generate time slots from 9 AM to 5 PM in 1-hour intervals
 const generateTimeSlots = () => {
@@ -54,11 +55,25 @@ export default function BookingForm() {
     const fetchBookedSlots = async (date: string) => {
         setLoadingSlots(true);
         try {
-            const res = await fetch(`/api/bookings/available-slots?date=${date}`);
-            const data = await res.json();
-            if (res.ok) {
-                setBookedSlots(data.bookedSlots || []);
-            }
+            // Fetch all bookings for the given date that are not cancelled
+            const { data: bookings, error } = await supabase
+                .from('bookings')
+                .select('booking_time, status')
+                .eq('booking_date', date)
+                .in('status', ['new', 'confirmed']);
+
+            if (error) throw error;
+
+            // Extract booked time slots (normalize to HH:MM:SS format for comparison)
+            const booked = bookings?.map(b => {
+                if (!b.booking_time) return null;
+                const time = b.booking_time.toString();
+                return time.includes(':') && time.split(':').length === 2 
+                    ? `${time}:00` 
+                    : time;
+            }).filter(Boolean) || [];
+            
+            setBookedSlots(booked as string[]);
         } catch (err) {
             console.error('Error fetching booked slots:', err);
         } finally {
@@ -99,28 +114,69 @@ export default function BookingForm() {
         }
 
         try {
-            const res = await fetch('/api/bookings', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    ...formData,
-                    bookingDate: formData.bookingDate,
-                    bookingTime: formData.bookingTime,
-                }),
-            });
+            // Check if the time slot is already booked
+            const { data: existingBooking } = await supabase
+                .from('bookings')
+                .select('id')
+                .eq('booking_date', formData.bookingDate)
+                .eq('booking_time', formData.bookingTime)
+                .in('status', ['new', 'confirmed'])
+                .single();
 
-            const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.error || 'Something went wrong');
+            if (existingBooking) {
+                throw new Error('This time slot is already booked. Please select another time.');
             }
 
-            // Redirect to success page or show success message
-            // For now, simple alert and reset or redirect
+            // 1. Upsert customer (check by phone, if exists use id, else create)
+            let customerId;
+            const { data: existingCustomer } = await supabase
+                .from('customers')
+                .select('id')
+                .eq('phone', formData.phone)
+                .single();
+
+            if (existingCustomer) {
+                customerId = existingCustomer.id;
+            } else {
+                const { data: newCustomer, error: createError } = await supabase
+                    .from('customers')
+                    .insert([{ 
+                        full_name: formData.fullName, 
+                        phone: formData.phone, 
+                        email: formData.email || null 
+                    }])
+                    .select('id')
+                    .single();
+
+                if (createError) throw createError;
+                customerId = newCustomer.id;
+            }
+
+            // 2. Create booking
+            const { data: booking, error: bookingError } = await supabase
+                .from('bookings')
+                .insert([
+                    {
+                        customer_id: customerId,
+                        bike_type: formData.bikeType,
+                        main_issue: formData.mainIssue,
+                        preferred_time_window: formData.preferredTimeWindow || null,
+                        booking_date: formData.bookingDate,
+                        booking_time: formData.bookingTime,
+                        diagnostic_ack: formData.diagnosticAck,
+                        status: 'new',
+                    },
+                ])
+                .select()
+                .single();
+
+            if (bookingError) throw bookingError;
+
+            // Success!
             alert('Booking submitted successfully! We will contact you soon.');
             router.push('/');
         } catch (err: any) {
-            setError(err.message);
+            setError(err.message || 'Something went wrong. Please try again.');
         } finally {
             setLoading(false);
         }
