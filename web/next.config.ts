@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
+  // Exclude admin routes from static export if needed
+  // They will still work via client-side routing
 };
 
 export default nextConfig;
