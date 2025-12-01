@@ -7,6 +7,13 @@ import Link from 'next/link';
 
 import { use } from 'react';
 
+// Required for static export with dynamic routes
+export async function generateStaticParams() {
+    // Return empty array - this page is client-side only
+    // Static pages will be generated at runtime via client-side routing
+    return [];
+}
+
 export default function BookingDetail({ params }: { params: Promise<{ id: string }> }) {
     const router = useRouter();
     const { id } = use(params);
