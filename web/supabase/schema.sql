@@ -55,3 +55,55 @@ create trigger bookings_set_updated_at
 before update on bookings
 for each row
 execute procedure set_updated_at();
+
+-- Enable Row Level Security on all tables
+ALTER TABLE customers ENABLE ROW LEVEL SECURITY;
+ALTER TABLE bookings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE services ENABLE ROW LEVEL SECURITY;
+ALTER TABLE booking_services ENABLE ROW LEVEL SECURITY;
+
+-- RLS Policies for customers table
+-- Allow public to select customers (needed for upsert logic in booking form)
+CREATE POLICY "Allow public to select customers"
+ON public.customers
+FOR SELECT
+TO public
+USING (true);
+
+-- Allow public to insert customers (needed for new customer registration)
+CREATE POLICY "Allow public to insert customers"
+ON public.customers
+FOR INSERT
+TO public
+WITH CHECK (true);
+
+-- RLS Policies for bookings table
+-- Allow public to select bookings (needed for checking availability and existing bookings)
+CREATE POLICY "Allow public to select bookings"
+ON public.bookings
+FOR SELECT
+TO public
+USING (true);
+
+-- Allow public to insert bookings (needed for booking form submissions)
+CREATE POLICY "Allow public to insert bookings"
+ON public.bookings
+FOR INSERT
+TO public
+WITH CHECK (true);
+
+-- RLS Policies for booking_services table
+-- Allow public to insert booking_services (needed for booking form submissions)
+CREATE POLICY "Allow public to insert booking_services"
+ON public.booking_services
+FOR INSERT
+TO public
+WITH CHECK (true);
+
+-- RLS Policies for services table
+-- Allow public to read active services (needed for displaying available services)
+CREATE POLICY "Allow public to read active services"
+ON public.services
+FOR SELECT
+TO public
+USING (active = true);
