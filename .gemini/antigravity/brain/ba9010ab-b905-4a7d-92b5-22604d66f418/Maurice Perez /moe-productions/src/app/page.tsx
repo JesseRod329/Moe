@@ -18,20 +18,20 @@ export default function Home() {
             className="object-cover opacity-50"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-black/60" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center space-y-6">
           <Badge variant="secondary" className="mb-4 text-sm px-4 py-1">
             24 Hour Appointment Only
           </Badge>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-lg">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-2xl [text-shadow:_2px_2px_8px_rgb(0_0_0_/_80%)]">
             Electric Bike Repair <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-green">
               That Keeps You Moving
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto drop-shadow-md">
+          <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto drop-shadow-xl [text-shadow:_1px_1px_4px_rgb(0_0_0_/_90%)]">
             Fast turnarounds, honest prices, and battery safe repairs for NYC riders.
           </p>
           
