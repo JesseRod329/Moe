@@ -13,7 +13,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           {/* Using regular img for static export with basePath */}
           <img
-            src="/Moe/hero-background.png"
+            src="/hero-background.png"
             alt="Moe Productions Shop"
             className="absolute inset-0 w-full h-full object-cover opacity-50"
             style={{ objectFit: 'cover' }}

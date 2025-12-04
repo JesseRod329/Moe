@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -95,7 +94,7 @@ export default function ServicesPage() {
           <Card key={category.category} className="bg-dark-surface border-white/10 hover:border-neon-blue/50 transition-all duration-300">
             <CardHeader className="flex flex-row items-center gap-4 pb-2">
               <div className="relative w-12 h-12">
-                <Image src={category.icon} alt={category.category} fill className="object-contain" />
+                <img src={category.icon} alt={category.category} className="w-full h-full object-contain" />
               </div>
               <CardTitle className="text-xl text-neon-blue">{category.category}</CardTitle>
             </CardHeader>
