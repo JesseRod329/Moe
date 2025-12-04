@@ -14,10 +14,10 @@ export default function Home() {
           <img
             src="/Moe/hero-background.png"
             alt="Moe Productions Shop"
-            className="absolute inset-0 w-full h-full object-cover opacity-50"
+            className="absolute inset-0 w-full h-full object-cover opacity-80"
             style={{ objectFit: 'cover' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center space-y-6">
