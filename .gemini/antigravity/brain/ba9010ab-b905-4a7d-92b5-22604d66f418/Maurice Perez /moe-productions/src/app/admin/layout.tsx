@@ -13,6 +13,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     const checkUser = async () => {
+      if (!supabase) {
+        // If Supabase is not configured, allow access to login page only
+        if (pathname !== "/admin/login") {
+          router.push("/admin/login");
+        }
+        setLoading(false);
+        return;
+      }
+      
       const { data: { session } } = await supabase.auth.getSession();
       if (!session && pathname !== "/admin/login") {
         router.push("/admin/login");
@@ -37,7 +46,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Button 
             variant="destructive" 
             onClick={async () => {
-              await supabase.auth.signOut();
+              if (supabase) {
+                await supabase.auth.signOut();
+              }
               router.push("/admin/login");
             }}
           >

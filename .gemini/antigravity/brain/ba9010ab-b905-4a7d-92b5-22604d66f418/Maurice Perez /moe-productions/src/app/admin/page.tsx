@@ -14,10 +14,17 @@ export default function AdminDashboard() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetchBookings();
+    if (supabase) {
+      fetchBookings();
+    }
   }, []);
 
   async function fetchBookings() {
+    if (!supabase) {
+      console.warn('Supabase client not configured');
+      return;
+    }
+    
     const { data, error } = await supabase
       .from("bookings")
       .select("*, customers(full_name, phone)")
@@ -81,7 +88,13 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
         ))}
-        {filteredBookings.length === 0 && (
+        {!supabase && (
+          <div className="text-center py-12">
+            <p className="text-yellow-500 mb-2">Supabase not configured</p>
+            <p className="text-gray-500 text-sm">Please configure environment variables to view bookings.</p>
+          </div>
+        )}
+        {supabase && filteredBookings.length === 0 && (
           <p className="text-center text-gray-500 py-12">No bookings found.</p>
         )}
       </div>

@@ -3,6 +3,10 @@ import { supabase } from "@/lib/supabase";
 
 export async function POST(request: Request) {
   try {
+    if (!supabase) {
+      return NextResponse.json({ error: "Supabase not configured" }, { status: 503 });
+    }
+
     const body = await request.json();
     const { fullName, phone, email, bikeType, mainIssue, preferredTimeWindow, diagnosticAck } = body;
 

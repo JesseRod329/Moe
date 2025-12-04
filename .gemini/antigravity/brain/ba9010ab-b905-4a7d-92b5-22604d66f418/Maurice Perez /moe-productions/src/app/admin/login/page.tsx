@@ -14,6 +14,12 @@ export default function AdminLogin() {
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
+    
+    if (!supabase) {
+      setMessage("Supabase not configured. Please configure environment variables.");
+      return;
+    }
+    
     setLoading(true);
     setMessage("");
 

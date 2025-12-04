@@ -18,10 +18,15 @@ function BookingDetailContent() {
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
-    if (id) fetchBooking();
+    if (id && supabase) fetchBooking();
   }, [id]);
 
   async function fetchBooking() {
+    if (!supabase) {
+      console.warn('Supabase client not configured');
+      return;
+    }
+    
     const { data, error } = await supabase
       .from("bookings")
       .select("*, customers(*)")
@@ -35,13 +40,30 @@ function BookingDetailContent() {
   }
 
   async function updateStatus(status: string) {
+    if (!supabase) {
+      alert("Supabase not configured. Cannot update status.");
+      return;
+    }
     await supabase.from("bookings").update({ status }).eq("id", id);
     fetchBooking();
   }
 
   async function saveNotes() {
+    if (!supabase) {
+      alert("Supabase not configured. Cannot save notes.");
+      return;
+    }
     await supabase.from("bookings").update({ admin_notes: notes }).eq("id", id);
     alert("Notes saved!");
+  }
+
+  if (!supabase) {
+    return (
+      <div className="text-white p-6">
+        <p className="text-yellow-500 mb-2">Supabase not configured</p>
+        <p className="text-gray-500 text-sm">Please configure environment variables to view booking details.</p>
+      </div>
+    );
   }
 
   if (!booking) return <div className="text-white p-6">Loading...</div>;
