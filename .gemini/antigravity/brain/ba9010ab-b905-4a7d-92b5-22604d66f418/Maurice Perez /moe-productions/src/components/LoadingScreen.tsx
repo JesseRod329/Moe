@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 
 export default function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
@@ -36,12 +35,10 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
 
       {/* Speedometer Container */}
       <div className="relative h-64 w-64">
-        <Image
+        <img
           src="/speedometer.png"
           alt="Loading Speedometer"
-          fill
-          className="object-contain"
-          priority
+          className="w-full h-full object-contain"
         />
         {/* Needle Animation (Simplified as a rotating div for now, or use SVG if complex) */}
         <motion.div
