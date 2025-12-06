@@ -3,18 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #000000;
+  --foreground: #ffffff;
+  --neon-green: #00FF7F;
+  --neon-blue: #00C8FF;
 }
 
 body {
-  color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }

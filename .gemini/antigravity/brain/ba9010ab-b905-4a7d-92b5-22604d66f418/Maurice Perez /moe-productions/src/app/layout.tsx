@@ -1,13 +1,21 @@
-import { Inter } from "next/font/google";
+import type { Metadata } from "next";
+import { Inter, Urbanist } from "next/font/google";
 import "./globals.css";
-import ClientLayout from "./ClientLayout";
-import { Metadata } from "next";
+import ClientLayout from "@/components/ClientLayout";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const urbanist = Urbanist({
+  variable: "--font-geist-mono", // Using Urbanist as the secondary/mono font variable for now or just add a new one
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: "Moe Productions Electric Bike Repair - 24 Hour Appointments in NYC",
-  description: "Electric bike and scooter repair by appointment, 24 hours a day. Diagnostics, tires, brakes, batteries, graphics, and powder coating. Book online with Moe Productions Electric Bike Service in New York City.",
+  title: "Moe Productions | Electric Bike Service NYC",
+  description: "Fast turnarounds, honest prices, and battery safe repairs for NYC riders.",
 };
 
 export default function RootLayout({
@@ -16,8 +24,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} min-h-screen bg-background font-sans antialiased`}>
+    <html lang="en">
+      <body
+        className={`${inter.variable} ${urbanist.variable} antialiased bg-black text-white`}
+      >
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

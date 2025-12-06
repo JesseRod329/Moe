@@ -1,96 +1,82 @@
-import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import Link from "next/link";
-import { Metadata } from "next";
+import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: "Contact Moe Productions Electric Bike Service",
-  description: "Contact Moe Productions Electric Bike Service for electric bike and scooter repairs in New York City. 24 hour appointment booking available online.",
-};
+export default function Contact() {
+    return (
+        <div className="bg-black min-h-screen pb-20">
+            <div className="max-w-7xl mx-auto px-6 pt-12">
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">
+                    Get in <span className="text-neon-blue">Touch</span>
+                </h1>
 
-export default function ContactPage() {
-  return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <div className="text-center mb-12 space-y-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tighter">
-          Contact Us
-        </h1>
-        <p className="text-xl text-gray-400">
-          We are here to help 24/7 by appointment.
-        </p>
-      </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    {/* Info Section */}
+                    <div className="space-y-8">
+                        <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
+                            <h2 className="text-2xl font-bold text-white mb-6">Shop Info</h2>
+                            <div className="space-y-4 text-gray-300">
+                                <p>
+                                    <strong className="text-neon-green block mb-1">Address</strong>
+                                    123 Electric Ave, Brooklyn, NY 11201<br />
+                                    (Entrance on side street)
+                                </p>
+                                <p>
+                                    <strong className="text-neon-green block mb-1">Phone</strong>
+                                    <a href="tel:+15555555555" className="hover:text-white transition-colors">(555) 555-5555</a>
+                                </p>
+                                <p>
+                                    <strong className="text-neon-green block mb-1">Hours</strong>
+                                    Mon - Fri: 10am - 7pm<br />
+                                    Sat: 11am - 5pm<br />
+                                    Sun: Closed
+                                </p>
+                            </div>
+                        </div>
 
-      <div className="grid md:grid-cols-2 gap-12">
-        <div className="space-y-8">
-          <div className="flex items-start gap-4">
-            <div className="bg-dark-surface p-3 rounded-lg border border-white/10">
-              <MapPin className="w-6 h-6 text-neon-blue" />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-white mb-2">Location</h3>
-              <p className="text-gray-400">New York City, NY</p>
-              <p className="text-sm text-gray-500 mt-1">(Full address provided upon booking confirmation)</p>
-            </div>
-          </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <a
+                                href="tel:+15555555555"
+                                className="flex items-center justify-center rounded-xl bg-neon-green px-6 py-4 text-black font-bold shadow-lg hover:bg-neon-green/90 transition-all"
+                            >
+                                Call Moe
+                            </a>
+                            <a
+                                href="https://maps.google.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center rounded-xl border border-neon-blue px-6 py-4 text-neon-blue font-bold hover:bg-neon-blue/10 transition-all"
+                            >
+                                Open in Maps
+                            </a>
+                            <Link
+                                href="/booking"
+                                className="sm:col-span-2 flex items-center justify-center rounded-xl bg-white/10 px-6 py-4 text-white font-bold hover:bg-white/20 transition-all"
+                            >
+                                Book Online
+                            </Link>
+                        </div>
+                    </div>
 
-          <div className="flex items-start gap-4">
-            <div className="bg-dark-surface p-3 rounded-lg border border-white/10">
-              <Clock className="w-6 h-6 text-neon-green" />
+                    {/* Map Section */}
+                    <div className="h-96 lg:h-auto rounded-2xl overflow-hidden border border-white/10 bg-white/5 relative">
+                        {/* Placeholder for Map Embed */}
+                        <div className="absolute inset-0 flex items-center justify-center text-gray-500">
+                            <div className="text-center">
+                                <p className="mb-2">Google Maps Embed</p>
+                                <p className="text-xs">Add your API key or iframe here</p>
+                            </div>
+                        </div>
+                        {/* Example iframe structure (commented out until user provides real address/key) */}
+                        {/* <iframe
+              src="https://www.google.com/maps/embed?pb=..."
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+            ></iframe> */}
+                    </div>
+                </div>
             </div>
-            <div>
-              <h3 className="text-xl font-bold text-white mb-2">Hours</h3>
-              <p className="text-gray-400">Open 24 Hours</p>
-              <p className="text-neon-blue font-medium mt-1">By Appointment Only</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="bg-dark-surface p-3 rounded-lg border border-white/10">
-              <Phone className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-white mb-2">Phone</h3>
-              <p className="text-gray-400">[Add Phone Number]</p>
-              <Button variant="link" className="text-neon-blue p-0 h-auto mt-1">
-                Call Moe
-              </Button>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="bg-dark-surface p-3 rounded-lg border border-white/10">
-              <Mail className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-white mb-2">Email</h3>
-              <p className="text-gray-400">[Add Email Address]</p>
-              <Button variant="link" className="text-neon-blue p-0 h-auto mt-1">
-                Email Moe
-              </Button>
-            </div>
-          </div>
         </div>
-
-        <div className="h-full min-h-[400px] bg-dark-surface rounded-2xl border border-white/10 flex items-center justify-center relative overflow-hidden">
-          {/* Placeholder Map */}
-          <div className="absolute inset-0 bg-gray-900/50" />
-          <div className="relative z-10 text-center space-y-4 p-6">
-            <MapPin className="w-12 h-12 text-neon-green mx-auto animate-bounce" />
-            <p className="text-gray-400">Map integration coming soon</p>
-            <Button variant="outline" className="mt-4">
-              Open in Maps
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-16 text-center">
-        <Link href="/booking">
-          <Button size="lg" className="font-bold px-12 h-14 text-lg shadow-neon-blue/20">
-            Book Online Now
-          </Button>
-        </Link>
-      </div>
-    </div>
-  );
+    );
 }

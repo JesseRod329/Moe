@@ -1,137 +1,113 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Battery, Clock, DollarSign, Wrench } from "lucide-react";
+import Image from 'next/image';
+import Link from 'next/link';
+import ServiceCard from '@/components/ServiceCard';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center">
+      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          {/* Using regular img for static export */}
-          <img
-            src="/hero-background.png"
+          <Image
+            src="/assets/hero_background_1764625861535.png"
             alt="Moe Productions Shop"
-            className="absolute inset-0 w-full h-full object-cover opacity-80"
-            style={{ objectFit: 'cover' }}
+            fill
+            className="object-cover opacity-60"
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 text-center space-y-6">
-          <Badge variant="secondary" className="mb-4 text-sm px-4 py-1">
-            24 Hour Appointment Only
-          </Badge>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-2xl [text-shadow:_2px_2px_8px_rgb(0_0_0_/_80%)]">
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
             Electric Bike Repair <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-green">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-blue">
               That Keeps You Moving
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto drop-shadow-xl [text-shadow:_1px_1px_4px_rgb(0_0_0_/_90%)]">
+          <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto">
             Fast turnarounds, honest prices, and battery safe repairs for NYC riders.
           </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link href="/booking">
-              <Button size="lg" className="text-lg px-8 h-14 w-full sm:w-auto shadow-neon-green/50">
-                Book a Repair
-              </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/booking"
+              className="rounded-full bg-neon-green px-8 py-4 text-lg font-bold text-black shadow-[0_0_20px_rgba(0,255,127,0.4)] hover:bg-neon-green/90 hover:scale-105 transition-all duration-300"
+            >
+              Book a Repair
             </Link>
-            <Link href="/pricing">
-              <Button variant="outline" size="lg" className="text-lg px-8 h-14 w-full sm:w-auto">
-                View Prices
-              </Button>
+            <Link
+              href="/pricing"
+              className="rounded-full border border-neon-blue px-8 py-4 text-lg font-bold text-neon-blue hover:bg-neon-blue/10 hover:scale-105 transition-all duration-300"
+            >
+              View Prices
             </Link>
           </div>
-          <p className="text-sm text-gray-400 mt-2">
-            Reservar reparación / Ver precios
-          </p>
         </div>
       </section>
 
       {/* Value Props */}
-      <section className="py-20 bg-dark-surface/50">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="bg-black/40 border-neon-blue/20">
-              <CardHeader>
-                <Clock className="w-10 h-10 text-neon-blue mb-2" />
-                <CardTitle>Same Week Repairs</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-400">
-                  Most jobs finished in days, not weeks, so you don't miss work. We know your bike is your livelihood.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-black/40 border-neon-green/20">
-              <CardHeader>
-                <Battery className="w-10 h-10 text-neon-green mb-2" />
-                <CardTitle>Battery Safe Shop</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-400">
-                  Repairs handled with NYC battery safety rules in mind. We inspect and store batteries safely.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-black/40 border-neon-blue/20">
-              <CardHeader>
-                <DollarSign className="w-10 h-10 text-neon-blue mb-2" />
-                <CardTitle>Transparent Prices</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-400">
-                  No surprise bills. Our full price sheet is posted online so you know exactly what to expect.
-                </p>
-              </CardContent>
-            </Card>
+            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-neon-green/50 transition-colors">
+              <h3 className="text-2xl font-bold text-white mb-4">Same Week Repairs</h3>
+              <p className="text-gray-400">
+                Most jobs finished in days, not weeks, so you do not miss work. We know your bike is your livelihood.
+              </p>
+            </div>
+            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-neon-green/50 transition-colors">
+              <h3 className="text-2xl font-bold text-white mb-4">Battery Safe Shop</h3>
+              <p className="text-gray-400">
+                Repairs handled with NYC battery safety rules in mind. We store and service packs responsibly.
+              </p>
+            </div>
+            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-neon-green/50 transition-colors">
+              <h3 className="text-2xl font-bold text-white mb-4">Transparent Prices</h3>
+              <p className="text-gray-400">
+                No surprise bills. Our full price sheet is posted online so you know exactly what to expect.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services Strip */}
-      <section className="py-16 border-y border-white/5 bg-black">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold text-white">Popular Services</h2>
-              <p className="text-gray-400">Everything from flats to full custom builds.</p>
-            </div>
-            <div className="flex flex-wrap gap-3 justify-center md:justify-end">
-              {["Tires & Tubes", "Brake Service", "Battery Terminals", "Graphics Kits", "Powder Coating", "Diagnostics"].map((service) => (
-                <Badge key={service} variant="outline" className="text-sm py-2 px-4 border-white/20">
-                  {service}
-                </Badge>
-              ))}
-            </div>
-            <Link href="/services">
-              <Button variant="ghost" className="group text-neon-green hover:text-neon-green/80 hover:bg-neon-green/10">
-                View All Services <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
+      {/* Popular Services Strip */}
+      <section className="py-20 bg-white/5 border-y border-white/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-3xl font-bold text-white">Popular Services</h2>
+            <Link href="/services" className="text-neon-blue hover:text-white transition-colors">
+              View All Services &rarr;
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* Delivery Rider Focus */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-background to-dark-surface z-0" />
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <Wrench className="w-16 h-16 text-neon-green mx-auto mb-6" />
-          <h2 className="text-4xl font-bold text-white mb-6">Built for Delivery Riders</h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-10">
-            Moe Productions focuses on the riders who keep NYC moving. We understand that downtime costs you money. 
-            That's why we offer appointment-only slots to get you back on the road fast.
-          </p>
-          <Link href="/booking">
-            <Button size="lg" className="bg-white text-black hover:bg-gray-200 font-bold">
-              Schedule Your Repair Now
-            </Button>
-          </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <ServiceCard
+              title="Tire Change"
+              price="$45"
+              description="One tire replacement. $80 for two."
+              icon="/assets/icon_tire_1764625896372.png"
+            />
+            <ServiceCard
+              title="Brake Service"
+              price="$20+"
+              description="Pads service per caliper. Bleeding available."
+              icon="/assets/icon_brake_1764625922566.png"
+            />
+            <ServiceCard
+              title="Battery Diagnose"
+              price="$90"
+              description="Full diagnostic check of your battery pack."
+              icon="/assets/icon_battery_1764625909438.png"
+            />
+            <ServiceCard
+              title="Custom Work"
+              price="Varies"
+              description="Graphics kits, powder coating, and mods."
+              icon="/assets/icon_custom_1764625942222.png"
+            />
+          </div>
         </div>
       </section>
     </div>

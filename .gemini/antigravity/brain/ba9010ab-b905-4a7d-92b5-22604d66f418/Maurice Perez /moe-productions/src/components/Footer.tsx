@@ -1,54 +1,97 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Footer() {
-  return (
-    <footer className="border-t border-white/10 bg-black py-12 text-sm text-gray-400">
-      <div className="container mx-auto grid gap-8 px-4 md:grid-cols-3">
-        {/* Column 1: Shop Info */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-bold text-white">
-            Moe Productions <br /> Electric Bike Service
-          </h3>
-          <ul className="space-y-2">
-            <li>24 hour appointment only</li>
-            <li>Electric bike and scooter repair</li>
-            <li>New York City</li>
-          </ul>
-          <div className="space-y-1 pt-2">
-            <p>Work phone: [Add Number]</p>
-            <p>Email: [Add Email]</p>
-          </div>
-        </div>
-
-        {/* Column 2: Quick Links */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-bold text-white">Quick Links</h3>
-          <nav className="flex flex-col gap-2">
-            <Link href="/" className="hover:text-neon-blue">Home</Link>
-            <Link href="/services" className="hover:text-neon-blue">Services</Link>
-            <Link href="/pricing" className="hover:text-neon-blue">Pricing</Link>
-            <Link href="/battery-safety" className="hover:text-neon-blue">Battery & Safety</Link>
-            <Link href="/booking" className="hover:text-neon-blue">Booking</Link>
-            <Link href="/faq" className="hover:text-neon-blue">FAQ</Link>
-            <Link href="/contact" className="hover:text-neon-blue">Contact</Link>
-          </nav>
-        </div>
-
-        {/* Column 3: Policies & Language */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-bold text-white">Policies & Info</h3>
-          <Link href="/policies" className="block hover:text-neon-blue">
-            View Shop Policies
-          </Link>
-          <div className="pt-4 text-xs text-gray-500">
-            <p>We speak English and Spanish.</p>
-            <p>Hablamos inglés y español.</p>
-          </div>
-        </div>
-      </div>
-      <div className="container mx-auto mt-12 border-t border-white/5 px-4 pt-8 text-center text-xs text-gray-600">
-        &copy; {new Date().getFullYear()} Moe Productions Electric Bike Service. All rights reserved.
-      </div>
-    </footer>
-  );
+    return (
+        <footer className="bg-black border-t border-white/10" aria-labelledby="footer-heading">
+            <h2 id="footer-heading" className="sr-only">
+                Footer
+            </h2>
+            <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
+                <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+                    <div className="space-y-8">
+                        <span className="text-2xl font-bold text-neon-green tracking-wider uppercase">Moe Productions</span>
+                        <p className="text-sm leading-6 text-gray-300">
+                            Electric Bike Repair that Keeps You Moving. <br />
+                            NYC based. Fast, honest, battery safe.
+                        </p>
+                        <div className="flex space-x-6">
+                            {/* Social links could go here */}
+                        </div>
+                    </div>
+                    <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+                        <div className="md:grid md:grid-cols-2 md:gap-8">
+                            <div>
+                                <h3 className="text-sm font-semibold leading-6 text-white">Services</h3>
+                                <ul role="list" className="mt-6 space-y-4">
+                                    <li>
+                                        <Link href="/services" className="text-sm leading-6 text-gray-300 hover:text-neon-blue">
+                                            Tires & Wheels
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/services" className="text-sm leading-6 text-gray-300 hover:text-neon-blue">
+                                            Brakes & Control
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/services" className="text-sm leading-6 text-gray-300 hover:text-neon-blue">
+                                            Battery Diagnostics
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/services" className="text-sm leading-6 text-gray-300 hover:text-neon-blue">
+                                            Custom Work
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="mt-10 md:mt-0">
+                                <h3 className="text-sm font-semibold leading-6 text-white">Support</h3>
+                                <ul role="list" className="mt-6 space-y-4">
+                                    <li>
+                                        <Link href="/pricing" className="text-sm leading-6 text-gray-300 hover:text-neon-blue">
+                                            Pricing
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/battery-safety" className="text-sm leading-6 text-gray-300 hover:text-neon-blue">
+                                            Battery Safety
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/faq" className="text-sm leading-6 text-gray-300 hover:text-neon-blue">
+                                            FAQ
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/contact" className="text-sm leading-6 text-gray-300 hover:text-neon-blue">
+                                            Contact
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="md:grid md:grid-cols-2 md:gap-8">
+                            <div>
+                                <h3 className="text-sm font-semibold leading-6 text-white">Contact</h3>
+                                <ul role="list" className="mt-6 space-y-4">
+                                    <li className="text-sm leading-6 text-gray-300">
+                                        New York City, NY
+                                    </li>
+                                    <li className="text-sm leading-6 text-gray-300">
+                                        <a href="tel:+15555555555" className="hover:text-neon-green">Call Moe</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
+                    <p className="text-xs leading-5 text-gray-400">
+                        &copy; {new Date().getFullYear()} Moe Productions. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    );
 }
