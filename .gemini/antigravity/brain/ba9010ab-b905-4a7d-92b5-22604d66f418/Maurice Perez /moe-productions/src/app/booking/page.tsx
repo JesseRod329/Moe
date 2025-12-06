@@ -31,15 +31,23 @@ export default function BookingPage() {
     };
 
     try {
-      // For static export, API routes don't work. 
-      // In production, this would need to be handled by a serverless function or external service.
-      // For now, we'll show a success message and suggest they call.
-      console.log("Booking request:", data);
-      
-      // Simulate success for static site
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to submit booking');
+      }
+
+      // Success - redirect to confirmation
       router.push("/booking/confirmation");
     } catch (err) {
-      setError("Something went wrong. Please call us directly to book your appointment.");
+      const errorMessage = err instanceof Error ? err.message : 'Something went wrong. Please call us directly to book your appointment.';
+      setError(errorMessage);
+      console.error('Booking submission error:', err);
     } finally {
       setLoading(false);
     }
