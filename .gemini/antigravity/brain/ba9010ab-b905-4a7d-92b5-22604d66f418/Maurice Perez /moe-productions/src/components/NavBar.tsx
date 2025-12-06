@@ -18,8 +18,17 @@ export default function NavBar() {
     return (
         <header className="bg-black/90 backdrop-blur-md fixed w-full z-50 border-b border-neon-blue/20">
             <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1">
-                    <Link href="/" className="-m-1.5 p-1.5 text-neon-green font-bold text-xl tracking-wider uppercase">
+                <div className="flex lg:flex-1 items-center gap-2">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="url(#lightning-gradient)" />
+                        <defs>
+                            <linearGradient id="lightning-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="#00C8FF" />
+                                <stop offset="100%" stopColor="#8B5CF6" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <Link href="/" className="-m-1.5 p-1.5 font-bold text-xl tracking-wider uppercase bg-gradient-to-r from-[#00C8FF] to-[#8B5CF6] bg-clip-text text-transparent">
                         Moe Productions
                     </Link>
                 </div>
@@ -52,8 +61,17 @@ export default function NavBar() {
                 <div className="lg:hidden fixed inset-0 z-50 bg-black">
                     <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
                         <div className="flex items-center justify-between">
-                            <Link href="/" className="-m-1.5 p-1.5 text-neon-green font-bold text-xl">
-                                Moe Productions
+                            <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2 font-bold text-xl">
+                                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="url(#lightning-gradient-mobile)" />
+                                    <defs>
+                                        <linearGradient id="lightning-gradient-mobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stopColor="#00C8FF" />
+                                            <stop offset="100%" stopColor="#8B5CF6" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <span className="bg-gradient-to-r from-[#00C8FF] to-[#8B5CF6] bg-clip-text text-transparent">Moe Productions</span>
                             </Link>
                             <button
                                 type="button"

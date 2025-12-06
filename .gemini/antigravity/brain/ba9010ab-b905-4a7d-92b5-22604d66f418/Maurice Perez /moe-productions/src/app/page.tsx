@@ -33,13 +33,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/booking"
-              className="rounded-full bg-neon-green px-8 py-4 text-lg font-bold text-black shadow-[0_0_20px_rgba(0,255,127,0.4)] hover:bg-neon-green/90 hover:scale-105 transition-all duration-300"
+              className="rounded-full bg-[#00C8FF] px-8 py-4 text-lg font-bold text-white shadow-[0_0_20px_rgba(0,200,255,0.4)] hover:bg-[#00C8FF]/90 hover:scale-105 transition-all duration-300"
             >
               Book a Repair
             </Link>
             <Link
               href="/pricing"
-              className="rounded-full border border-neon-blue px-8 py-4 text-lg font-bold text-neon-blue hover:bg-neon-blue/10 hover:scale-105 transition-all duration-300"
+              className="rounded-full border-2 border-white/20 bg-black/40 backdrop-blur-sm px-8 py-4 text-lg font-bold text-white hover:bg-white/10 hover:scale-105 transition-all duration-300"
             >
               View Prices
             </Link>
