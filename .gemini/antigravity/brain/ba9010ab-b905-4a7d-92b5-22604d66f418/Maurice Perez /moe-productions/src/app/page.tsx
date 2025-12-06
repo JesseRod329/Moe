@@ -10,9 +10,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0">
-          {/* Using regular img for static export with basePath */}
+          {/* Using regular img for static export */}
           <img
-            src="/Moe/hero-background.png"
+            src="/hero-background.png"
             alt="Moe Productions Shop"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             style={{ objectFit: 'cover' }}
