@@ -28,9 +28,11 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
+        working-directory: .gemini/antigravity/brain/ba9010ab-b905-4a7d-92b5-22604d66f418/Maurice\ Perez\ /moe-productions
         run: npm ci
 
       - name: Build with Next.js
+        working-directory: .gemini/antigravity/brain/ba9010ab-b905-4a7d-92b5-22604d66f418/Maurice\ Perez\ /moe-productions
         run: npm run build
         env:
           NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
@@ -39,7 +41,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: .gemini/antigravity/brain/ba9010ab-b905-4a7d-92b5-22604d66f418/Maurice\ Perez\ /moe-productions/out
 
   deploy:
     environment:
