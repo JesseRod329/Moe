@@ -1,112 +1,270 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import ServiceCard from '@/components/ServiceCard';
+import Image from "next/image";
+import Link from "next/link";
+import ServiceCard from "@/components/ServiceCard";
+
+const trustBadges = [
+  "Battery fire safe shop",
+  "Same-week turnarounds",
+  "Pickups available",
+  "Parts always in-stock",
+];
+
+const highlightCards = [
+  {
+    title: "Flat tire to full rebuilds",
+    copy: "From a single tube swap to complete custom builds, we keep delivery bikes, commuters, and long-haul rigs on the road.",
+  },
+  {
+    title: "Honest diagnostics",
+    copy: "We will tell you what is worth fixing and what is not. Photos and estimates are sent before every repair.",
+  },
+  {
+    title: "NYC battery compliant",
+    copy: "Packs are charged, stored, and transported the right way so you stay safe and regulation-ready.",
+  },
+];
+
+const processSteps = [
+  {
+    title: "Book your slot",
+    description: "Pick a repair window online so you do not wait around. Walk-ins welcome when space allows.",
+  },
+  {
+    title: "Same-day intake",
+    description: "We log your bike, gather symptoms, and send a photo-backed quote before we turn a screw.",
+  },
+  {
+    title: "Ride out confident",
+    description: "Test ride with us and leave with clear notes on the work performed plus next service reminders.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/assets/hero_background_1764625861535.png"
-            alt="Moe Productions Shop"
-            fill
-            className="object-cover opacity-60"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-        </div>
+    <div className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 opacity-50">
+        <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-neon-green/20 blur-3xl" />
+        <div className="absolute right-[-10%] top-20 h-80 w-80 rounded-full bg-neon-blue/20 blur-3xl" />
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black via-black/40 to-transparent" />
+      </div>
 
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-            Electric Bike Repair <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-blue">
-              That Keeps You Moving
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Fast turnarounds, honest prices, and battery safe repairs for NYC riders.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <section className="relative mx-auto flex max-w-7xl flex-col gap-12 px-6 pb-20 pt-10 lg:flex-row lg:items-center lg:pt-24">
+        <div className="flex-1 space-y-8">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-200 shadow-[0_0_30px_rgba(0,255,127,0.15)]">
+            <span className="h-2 w-2 rounded-full bg-neon-green" />
+            NYC Electric Bike Repair & Custom Builds
+          </div>
+          <div className="space-y-5">
+            <h1 className="text-4xl font-bold leading-tight text-white md:text-6xl">
+              Keep Delivering. <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-blue">Stay Rolling.</span>
+            </h1>
+            <p className="max-w-2xl text-lg text-gray-300 md:text-xl">
+              Moe Productions is the trusted electric bike shop for riders who cannot afford downtime. Fast service, honest pricing, and battery-safe repairs that meet New York City standards.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/booking"
-              className="rounded-full bg-neon-green px-8 py-4 text-lg font-bold text-black shadow-[0_0_20px_rgba(0,255,127,0.4)] hover:bg-neon-green/90 hover:scale-105 transition-all duration-300"
+              className="rounded-full bg-neon-green px-6 py-3 text-lg font-semibold text-black shadow-[0_0_30px_rgba(0,255,127,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_0_45px_rgba(0,255,127,0.45)]"
             >
               Book a Repair
             </Link>
             <Link
               href="/pricing"
-              className="rounded-full border border-neon-blue px-8 py-4 text-lg font-bold text-neon-blue hover:bg-neon-blue/10 hover:scale-105 transition-all duration-300"
+              className="rounded-full border border-white/20 px-6 py-3 text-lg font-semibold text-white transition hover:border-neon-blue hover:text-neon-blue"
             >
-              View Prices
+              View Pricing
             </Link>
+            <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-gray-300">
+              <div className="rounded-lg bg-black/50 px-3 py-1 text-xs font-semibold text-neon-green">New</div>
+              <span>Studio monitor diagnostics now available.</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
+            {trustBadges.map((badge) => (
+              <div
+                key={badge}
+                className="flex items-center gap-3 rounded-xl border border-white/5 bg-white/5 px-4 py-3 text-sm text-gray-200 shadow-[0_10px_40px_-25px_rgba(0,0,0,0.6)]"
+              >
+                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-neon-green/50 bg-black/60 text-neon-green">★</span>
+                <p className="leading-tight">{badge}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex-1">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 via-black to-white/5 p-1 shadow-[0_20px_60px_rgba(0,0,0,0.55)]">
+            <div className="absolute right-6 top-6 flex items-center gap-2 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold text-neon-blue">
+              <span className="h-2 w-2 rounded-full bg-neon-blue" />
+              Open Mon-Sat 10a-7p
+            </div>
+            <div className="relative h-[460px] overflow-hidden rounded-[22px] border border-white/10 bg-black">
+              <Image
+                src="/assets/hero_background_1764625861535.png"
+                alt="Moe Productions Shop"
+                fill
+                className="object-cover opacity-90"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+              <div className="absolute bottom-0 w-full space-y-3 px-6 pb-6">
+                <div className="flex items-center gap-3 text-sm text-gray-200">
+                  <span className="inline-flex items-center rounded-full bg-neon-green/20 px-3 py-1 text-xs font-semibold text-neon-green">
+                    Battery safe
+                  </span>
+                  <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white">
+                    Walk-ins welcome
+                  </span>
+                </div>
+                <div className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-gray-200">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-semibold text-white">Need a pickup?</span>
+                    <Link href="/contact" className="text-neon-blue hover:underline">
+                      Call the shop →
+                    </Link>
+                  </div>
+                  <p className="mt-2 text-sm text-gray-300">
+                    We work with couriers to get your bike safely to us when you are stuck on route.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Value Props */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-neon-green/50 transition-colors">
-              <h3 className="text-2xl font-bold text-white mb-4">Same Week Repairs</h3>
-              <p className="text-gray-400">
-                Most jobs finished in days, not weeks, so you do not miss work. We know your bike is your livelihood.
-              </p>
+      <section className="relative border-y border-white/5 bg-black/60 py-16">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-8 lg:grid-cols-3">
+            {highlightCards.map((item) => (
+              <div
+                key={item.title}
+                className="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_10px_40px_-25px_rgba(0,0,0,0.6)] transition hover:-translate-y-1 hover:border-neon-green/50"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-black/60 text-neon-green group-hover:scale-105">
+                  <span className="text-lg">◆</span>
+                </div>
+                <h3 className="mt-4 text-xl font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-gray-300">{item.copy}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white/[0.02] py-16">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 lg:flex-row lg:items-center">
+          <div className="flex-1 space-y-4">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-neon-blue">Services</p>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Popular fixes riders book every week</h2>
+            <p className="text-gray-300 md:text-lg">
+              Straightforward pricing on the most requested repairs. Check our full menu for complex diagnostics, custom builds, and studio monitor service.
+            </p>
+            <div className="flex flex-wrap gap-3 text-sm text-gray-200">
+              <span className="rounded-full bg-white/10 px-3 py-1">Fast turnarounds</span>
+              <span className="rounded-full bg-white/10 px-3 py-1">OEM & upgraded parts</span>
+              <span className="rounded-full bg-white/10 px-3 py-1">Warranty-backed</span>
             </div>
-            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-neon-green/50 transition-colors">
-              <h3 className="text-2xl font-bold text-white mb-4">Battery Safe Shop</h3>
-              <p className="text-gray-400">
-                Repairs handled with NYC battery safety rules in mind. We store and service packs responsibly.
-              </p>
-            </div>
-            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-neon-green/50 transition-colors">
-              <h3 className="text-2xl font-bold text-white mb-4">Transparent Prices</h3>
-              <p className="text-gray-400">
-                No surprise bills. Our full price sheet is posted online so you know exactly what to expect.
-              </p>
+            <Link
+              href="/services"
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:border-neon-blue hover:text-neon-blue"
+            >
+              View all services →
+            </Link>
+          </div>
+
+          <div className="flex-1">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <ServiceCard
+                title="Tire Change"
+                price="$45"
+                description="One tire replacement. $80 for two."
+                icon="/assets/icon_tire_1764625896372.png"
+              />
+              <ServiceCard
+                title="Brake Service"
+                price="$20+"
+                description="Pads service per caliper. Bleeding available."
+                icon="/assets/icon_brake_1764625922566.png"
+              />
+              <ServiceCard
+                title="Battery Diagnose"
+                price="$90"
+                description="Full diagnostic check of your battery pack."
+                icon="/assets/icon_battery_1764625909438.png"
+              />
+              <ServiceCard
+                title="Custom Work"
+                price="Varies"
+                description="Graphics kits, powder coating, and mods."
+                icon="/assets/icon_custom_1764625942222.png"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Popular Services Strip */}
-      <section className="py-20 bg-white/5 border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl font-bold text-white">Popular Services</h2>
-            <Link href="/services" className="text-neon-blue hover:text-white transition-colors">
-              View All Services &rarr;
-            </Link>
+      <section className="bg-gradient-to-r from-black via-black to-white/5 py-16">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+            <div className="space-y-4">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-neon-blue">Our process</p>
+              <h2 className="text-3xl font-bold text-white md:text-4xl">Clear communication from drop-off to pickup</h2>
+              <p className="text-gray-300 md:text-lg">
+                No surprises. You will always know what we are fixing, how much it costs, and when your bike will be ready. We communicate through text, photo updates, and in-shop walkthroughs.
+              </p>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-gray-200">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-neon-green/20 text-center text-lg leading-10 text-neon-green">✓</div>
+                  <div>
+                    <p className="font-semibold text-white">Rush repairs available</p>
+                    <p className="text-gray-300">Ask about same-day turnaround for simple fixes when parts are on hand.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-4">
+              {processSteps.map((step, index) => (
+                <div
+                  key={step.title}
+                  className="group flex gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-neon-blue/50"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-black/60 text-lg font-bold text-neon-blue">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">{step.title}</h3>
+                    <p className="text-gray-300">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <ServiceCard
-              title="Tire Change"
-              price="$45"
-              description="One tire replacement. $80 for two."
-              icon="/assets/icon_tire_1764625896372.png"
-            />
-            <ServiceCard
-              title="Brake Service"
-              price="$20+"
-              description="Pads service per caliper. Bleeding available."
-              icon="/assets/icon_brake_1764625922566.png"
-            />
-            <ServiceCard
-              title="Battery Diagnose"
-              price="$90"
-              description="Full diagnostic check of your battery pack."
-              icon="/assets/icon_battery_1764625909438.png"
-            />
-            <ServiceCard
-              title="Custom Work"
-              price="Varies"
-              description="Graphics kits, powder coating, and mods."
-              icon="/assets/icon_custom_1764625942222.png"
-            />
+        </div>
+      </section>
+
+      <section className="border-t border-white/5 bg-black py-16">
+        <div className="mx-auto max-w-6xl space-y-6 rounded-3xl border border-white/10 bg-gradient-to-br from-black via-white/5 to-black p-10 text-center shadow-[0_20px_60px_rgba(0,0,0,0.55)]">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-neon-blue">Ready to roll?</p>
+          <h2 className="text-3xl font-bold text-white md:text-4xl">Book a repair and get back on route faster</h2>
+          <p className="mx-auto max-w-3xl text-lg text-gray-300">
+            Schedule online or call the shop if you are stuck on a delivery. We will secure your bike, diagnose the issue, and get you back in the saddle with clear pricing.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="/booking"
+              className="rounded-full bg-neon-green px-8 py-3 text-base font-semibold text-black shadow-[0_0_30px_rgba(0,255,127,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_0_45px_rgba(0,255,127,0.45)]"
+            >
+              Book Now
+            </Link>
+            <Link
+              href="/contact"
+              className="rounded-full border border-white/20 px-8 py-3 text-base font-semibold text-white transition hover:border-neon-blue hover:text-neon-blue"
+            >
+              Call the Shop
+            </Link>
           </div>
         </div>
       </section>
