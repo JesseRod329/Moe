@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --neon-green: #00FF7F;
+  --neon-blue: #00C8FF;
+}
+
+body {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 127, 0.08), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(0, 200, 255, 0.08), transparent 30%),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
