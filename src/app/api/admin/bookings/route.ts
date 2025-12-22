@@ -30,9 +30,11 @@ export async function GET(request: Request) {
             query = query.eq('bike_type', bikeType);
         }
 
-        if (error) {
-            console.error('Database Admin Bookings Error:', error);
-            throw new Error(`Failed to fetch bookings: ${error.message}`);
+        const { data: bookings, error: dbError } = await query;
+
+        if (dbError) {
+            console.error('Database Admin Bookings Error:', dbError);
+            throw new Error(`Failed to fetch bookings: ${dbError.message}`);
         }
 
         return NextResponse.json({ bookings });
