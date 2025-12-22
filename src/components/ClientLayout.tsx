@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import SpeedometerLoader from './SpeedometerLoader';
 import Layout from './Layout';
-import CustomCursor from './CustomCursor';
 import InstagramPopup from './InstagramPopup';
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -11,7 +10,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
     return (
         <>
-            <CustomCursor />
             <InstagramPopup />
             {loading && <SpeedometerLoader onFinished={() => setLoading(false)} />}
             <div className={`transition-opacity duration-1000 ${loading ? 'opacity-0' : 'opacity-100'}`}>
