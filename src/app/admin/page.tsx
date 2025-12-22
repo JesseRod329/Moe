@@ -21,12 +21,7 @@ export default function AdminDashboard() {
 
     useEffect(() => {
         if (isLoggedIn) {
-            // fetchBookings();
-            setBookings([
-                { id: 1, created_at: new Date().toISOString(), customers: { full_name: 'John Doe', phone: '123-456-7890' }, bike_type: 'Super73', main_issue: 'Flat Tire', status: 'new' },
-                { id: 2, created_at: new Date().toISOString(), customers: { full_name: 'Jane Smith', phone: '987-654-3210' }, bike_type: 'Onyx RCR', main_issue: 'Brake Bleed', status: 'confirmed' }
-            ]);
-            setLoading(false);
+            fetchBookings();
         }
     }, [filter, isLoggedIn]);
 
@@ -41,7 +36,18 @@ export default function AdminDashboard() {
     };
 
     const fetchBookings = async () => {
-        // ... (commented out for debugging)
+        try {
+            setLoading(true);
+            const response = await fetch(`/api/admin/bookings?status=${filter === 'all' ? '' : filter}`);
+            const data = await response.json();
+            
+            if (data.error) throw new Error(data.error);
+            setBookings(data.bookings || []);
+        } catch (error) {
+            console.error('Error fetching bookings:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const getStatusColor = (status: string) => {
@@ -96,13 +102,13 @@ export default function AdminDashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                     <div className="bg-white/5 border border-white/10 p-6 rounded-xl">
                         <h3 className="text-gray-400 text-sm font-medium uppercase mb-2">Monthly Revenue</h3>
-                        <p className="text-3xl font-bold text-neon-green">$12,450</p>
-                        <span className="text-xs text-gray-500">+15% from last month</span>
+                        <p className="text-3xl font-bold text-neon-green">$0</p>
+                        <span className="text-xs text-gray-500">Live revenue tracking coming soon</span>
                     </div>
                     <div className="bg-white/5 border border-white/10 p-6 rounded-xl">
                         <h3 className="text-gray-400 text-sm font-medium uppercase mb-2">Active Repairs</h3>
-                        <p className="text-3xl font-bold text-white">8</p>
-                        <span className="text-xs text-neon-blue">3 High Priority</span>
+                        <p className="text-3xl font-bold text-white">{Array.isArray(bookings) ? bookings.filter(b => b.status === 'confirmed').length : 0}</p>
+                        <span className="text-xs text-neon-blue">Confirmed for service</span>
                     </div>
                     <div className="bg-white/5 border border-white/10 p-6 rounded-xl">
                         <h3 className="text-gray-400 text-sm font-medium uppercase mb-2">Pending Bookings</h3>
@@ -111,8 +117,8 @@ export default function AdminDashboard() {
                     </div>
                     <div className="bg-white/5 border border-white/10 p-6 rounded-xl">
                         <h3 className="text-gray-400 text-sm font-medium uppercase mb-2">Total Customers</h3>
-                        <p className="text-3xl font-bold text-white">142</p>
-                        <span className="text-xs text-neon-green">+8 this week</span>
+                        <p className="text-3xl font-bold text-white">{Array.isArray(bookings) ? new Set(bookings.map(b => b.customers?.email)).size : 0}</p>
+                        <span className="text-xs text-neon-green">Unique customer contacts</span>
                     </div>
                 </div>
 

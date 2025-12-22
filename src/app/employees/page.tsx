@@ -30,19 +30,16 @@ export default function EmployeesPage() {
         setIsLoggedIn(false);
     };
 
-    // Mock Data
-    const tasks = [
-        { id: 1, title: 'Replace Rear Tire - Super73', status: 'In Progress', priority: 'High', due: 'Today, 2:00 PM' },
-        { id: 2, title: 'Brake Bleed - Onyx RCR', status: 'Pending', priority: 'Medium', due: 'Tomorrow, 10:00 AM' },
-        { id: 3, title: 'Battery Diagnostic - Surron', status: 'Completed', priority: 'High', due: 'Yesterday' },
-    ];
+    // Live data placeholders
+    const [tasks, setTasks] = useState<any[]>([]);
+    const [inventory, setInventory] = useState<any[]>([]);
 
-    const inventory = [
-        { id: 101, name: '20x4" Street Tire', stock: 12, location: 'A-3' },
-        { id: 102, name: 'Magura MT5 Pads', stock: 8, location: 'B-1' },
-        { id: 103, name: '72V Controller', stock: 2, location: 'Locked Cabinet' },
-        { id: 104, name: 'Shimano Mineral Oil', stock: '3 Bottles', location: 'Fluids Shelf' },
-    ];
+    useEffect(() => {
+        if (isLoggedIn) {
+            // fetchTasks();
+            // fetchInventory();
+        }
+    }, [isLoggedIn]);
 
     // Show loading state
     if (isLoading) {
@@ -93,7 +90,7 @@ export default function EmployeesPage() {
                     <div className="grid grid-cols-1 gap-6">
                         <h2 className="text-2xl font-bold text-white mb-4">Current Assignments</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {tasks.map((task) => (
+                            {tasks.length > 0 ? tasks.map((task) => (
                                 <div key={task.id} className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-neon-green/50 transition-colors group">
                                     <div className="flex justify-between items-start mb-4">
                                         <span className={`px-2 py-1 rounded text-xs font-bold uppercase ${task.priority === 'High' ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'}`}>
@@ -111,7 +108,11 @@ export default function EmployeesPage() {
                                         </button>
                                     </div>
                                 </div>
-                            ))}
+                            )) : (
+                                <div className="col-span-full py-20 text-center bg-white/5 border border-white/10 rounded-xl">
+                                    <p className="text-gray-500">No tasks assigned yet.</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}
@@ -130,7 +131,7 @@ export default function EmployeesPage() {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-white/10">
-                                    {inventory.map((item) => (
+                                    {inventory.length > 0 ? inventory.map((item) => (
                                         <tr key={item.id} className="hover:bg-white/5 transition-colors">
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{item.name}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-neon-green">{item.stock}</td>
@@ -139,7 +140,13 @@ export default function EmployeesPage() {
                                                 <button className="text-neon-blue hover:text-white transition-colors">Request Restock</button>
                                             </td>
                                         </tr>
-                                    ))}
+                                    )) : (
+                                        <tr>
+                                            <td colSpan={4} className="px-6 py-10 text-center text-gray-500">
+                                                Inventory data coming soon.
+                                            </td>
+                                        </tr>
+                                    )}
                                 </tbody>
                             </table>
                         </div>

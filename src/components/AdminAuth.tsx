@@ -15,8 +15,8 @@ export default function AdminAuth({ onLogin }: AdminAuthProps) {
 
     // Admin credentials (only for Moe)
     const ADMIN_CREDENTIALS = {
-        username: 'moeprod',
-        password: 'Mprod12344321'
+        username: 'MoeP',
+        password: 'Winter26'
     };
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -121,15 +121,6 @@ export default function AdminAuth({ onLogin }: AdminAuthProps) {
                             )}
                         </button>
                     </form>
-
-                    {/* Demo Credentials Hint */}
-                    <div className="mt-6 p-4 bg-orange-500/10 border border-orange-500/30 rounded-xl">
-                        <p className="text-orange-400 text-sm font-medium mb-1">Admin Credentials:</p>
-                        <p className="text-gray-400 text-sm">
-                            Username: <span className="text-white font-mono">moeprod</span><br />
-                            Password: <span className="text-white font-mono">Mprod12344321</span>
-                        </p>
-                    </div>
                 </div>
 
                 {/* Back Link */}

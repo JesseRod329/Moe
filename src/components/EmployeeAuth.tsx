@@ -15,10 +15,10 @@ export default function EmployeeAuth({ onLogin }: EmployeeAuthProps) {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    // Sample credentials
-    const SAMPLE_CREDENTIALS = {
-        username: 'moeprod',
-        password: 'Mprod12344321'
+    // Real credentials
+    const REAL_CREDENTIALS = {
+        username: 'MoeP',
+        password: 'Winter26'
     };
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -30,14 +30,14 @@ export default function EmployeeAuth({ onLogin }: EmployeeAuthProps) {
         await new Promise(resolve => setTimeout(resolve, 1000));
 
         // Check credentials
-        if (identifier.toLowerCase() === SAMPLE_CREDENTIALS.username.toLowerCase() &&
-            password === SAMPLE_CREDENTIALS.password) {
+        if (identifier.toLowerCase() === REAL_CREDENTIALS.username.toLowerCase() &&
+            password === REAL_CREDENTIALS.password) {
             // Store login state
             sessionStorage.setItem('employeeLoggedIn', 'true');
             sessionStorage.setItem('employeeName', identifier);
             onLogin();
         } else {
-            setError('Invalid credentials. Try username: moeprod');
+            setError('Invalid credentials');
         }
 
         setIsLoading(false);
@@ -213,15 +213,6 @@ export default function EmployeeAuth({ onLogin }: EmployeeAuthProps) {
                             </button>
                         </form>
                     )}
-
-                    {/* Demo Credentials Hint */}
-                    <div className="mt-6 p-4 bg-neon-blue/10 border border-neon-blue/30 rounded-xl">
-                        <p className="text-neon-blue text-sm font-medium mb-1">Demo Credentials:</p>
-                        <p className="text-gray-400 text-sm">
-                            Username: <span className="text-white font-mono">moeprod</span><br />
-                            Password: <span className="text-white font-mono">Mprod12344321</span>
-                        </p>
-                    </div>
                 </div>
 
                 {/* Back Link */}
