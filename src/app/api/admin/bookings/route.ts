@@ -30,13 +30,20 @@ export async function GET(request: Request) {
             query = query.eq('bike_type', bikeType);
         }
 
-        const { data: bookings, error } = await query;
-
-        if (error) throw error;
+        if (error) {
+            console.error('Database Admin Bookings Error:', error);
+            throw new Error(`Failed to fetch bookings: ${error.message}`);
+        }
 
         return NextResponse.json({ bookings });
     } catch (error: any) {
-        console.error('Admin bookings error:', error);
-        return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 });
+        console.error('Admin bookings handler error:', error);
+        
+        let errorMessage = error.message || 'Internal Server Error';
+        if (errorMessage === 'fetch failed') {
+            errorMessage = 'Could not connect to database. This usually means the Supabase URL is invalid or missing.';
+        }
+
+        return NextResponse.json({ error: errorMessage }, { status: 500 });
     }
 }

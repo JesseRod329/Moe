@@ -49,14 +49,21 @@ export async function POST(request: Request) {
             .select()
             .single();
 
-        if (bookingError) throw bookingError;
-
-        // 3. Trigger notification (handled by Supabase Edge Function or Database Webhook usually)
-        // For now, we assume Supabase handles the email trigger based on the insert.
+        if (bookingError) {
+            console.error('Database Booking Error:', bookingError);
+            throw new Error(`Booking creation failed: ${bookingError.message}`);
+        }
 
         return NextResponse.json({ success: true, booking });
     } catch (error: any) {
-        console.error('Booking error:', error);
-        return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 });
+        console.error('Booking API Handler Error:', error);
+        
+        // Provide a more helpful error message for "fetch failed" which usually means invalid Supabase URL
+        let errorMessage = error.message || 'Internal Server Error';
+        if (errorMessage === 'fetch failed') {
+            errorMessage = 'Could not connect to database. This usually means the Supabase URL is invalid or missing.';
+        }
+
+        return NextResponse.json({ error: errorMessage }, { status: 500 });
     }
 }
